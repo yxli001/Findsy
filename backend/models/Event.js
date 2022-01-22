@@ -6,7 +6,7 @@ const eventSchema = new mongoose.Schema({
         required: true,
     },
     author: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "users",
         required: true,
     },
@@ -27,7 +27,7 @@ const eventSchema = new mongoose.Schema({
     },
     participants: [
         {
-            type: Schema.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: "users",
         },
     ],
