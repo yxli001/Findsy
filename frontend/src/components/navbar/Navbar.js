@@ -5,7 +5,7 @@ import "./Navbar.css";
 import navAnimationHandler from "./NavAnimationHandler";
 import hideNavbar from "./HideNavbar";
 
-export const Navbar = () => {
+export const Navbar = (props) => {
     return (
         <nav className="navbar">
             <div className="logo" onClick={hideNavbar}>
@@ -21,6 +21,11 @@ export const Navbar = () => {
                 <li className="link" onClick={hideNavbar}>
                     <Navitem url="/events/new" name="Post Event" />
                 </li>
+                {props.token === "" ? (
+                    <Navitem url="/login" name="Login" />
+                ) : (
+                    <Navitem url="/signup" name="Welcome" />
+                )}
             </ul>
             <div className="burger" onClick={navAnimationHandler}>
                 <div className="line1"></div>

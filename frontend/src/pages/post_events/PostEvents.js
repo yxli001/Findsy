@@ -28,7 +28,7 @@ export const PostEvents = () => {
                                 value={titleState}
                                 onChange={(e) => setTitleState(e.target.value)}
                                 className="form-input"
-                                required="true"
+                                required={true}
                             />
                         </div>
                         <div className="form-section">
@@ -42,7 +42,7 @@ export const PostEvents = () => {
                                     setDescriptionState(e.target.value)
                                 }
                                 className="form-input"
-                                required="true"
+                                required={true}
                             />
                         </div>
                         <div className="form-section">
@@ -54,7 +54,7 @@ export const PostEvents = () => {
                                 value={dateState}
                                 onChange={(e) => setDateState(e.target.value)}
                                 className="form-input"
-                                required="true"
+                                required={true}
                             />
                         </div>
                         <div className="form-section">
@@ -68,7 +68,7 @@ export const PostEvents = () => {
                                     setLocationState(e.target.value)
                                 }
                                 className="form-input"
-                                required="true"
+                                required={true}
                             />
                         </div>
                         <div className="form-section submit-section">

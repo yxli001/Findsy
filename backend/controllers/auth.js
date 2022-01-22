@@ -46,20 +46,22 @@ const login = async (req, res) => {
 
     const { username, password } = req.body;
     const user = await User.findOne({ email: username }).lean();
-    if (await bcrypt.compare(password, user.password)) {
-        //Username password combination successful
-        const token = jwt.sign(
-            { id: user._id, username: user.email },
-            process.env.JWT_SECRET
-        ); //Publicly visible do not put important stuff here
-        return res.json({ status: "OK", data: token });
-    }
     if (!user) {
         return res.json({
             status: "error",
             error: "Invalid username/password",
         });
     }
+    if (await bcrypt.compare(password, user.password)) {
+        //Username password combination successful
+        const token = jwt.sign(
+            { id: user._id, username: user.email },
+            process.env.JWT_SECRET
+        ); //Publicly visible do not put important stuff here
+        console.log(token);
+        return res.json({ status: "OK", data: token });
+    }
+
     res.json({ status: "error", error: "Invalid username/password" });
 };
 
