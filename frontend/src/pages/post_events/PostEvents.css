@@ -1,0 +1,64 @@
+.post-events-container {
+    display: flex;
+    border-radius: 10px;
+    width: 40%;
+    flex-direction: column;
+    padding: 2%;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 2%;
+    background-color: white;
+}
+
+.post-events-page {
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(to right, #348feb, #52bf61);
+    padding: 2%;
+}
+
+.post-events-form {
+    width: 100%;
+}
+
+.form-section {
+    width: 100%;
+    margin-top: 2%;
+}
+
+.form-input {
+    width: 100%;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    padding: 1%;
+    color: rgba(0, 0, 0, 70%);
+}
+
+.form-header-title {
+    color: rgba(0, 0, 0, 75%);
+    margin-bottom: 0.5%;
+}
+
+.form-input:focus {
+    outline: none;
+    border-bottom: 2px solid rgb(61, 173, 76);
+    /* Add animation slide in */
+    border-image: linear-gradient(to right, #348feb, #52bf61) 1;
+}
+
+.post-event-submit {
+    width: 25%;
+    padding: 1%;
+    background-image: linear-gradient(to right, #348feb, #52bf61);
+    color: white;
+    border: none;
+}
+
+.submit-section {
+    margin-top: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
