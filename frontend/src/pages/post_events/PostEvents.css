@@ -45,7 +45,7 @@
     outline: none;
     border-bottom: 2px solid rgb(61, 173, 76);
     /* Add animation slide in */
-    border-image: linear-gradient(to right, #348feb, #52bf61) 1;
+    border-image: linear-gradient(to right, #348feb, #1f2720) 1;
 }
 
 .post-event-submit {
