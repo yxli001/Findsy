@@ -15,34 +15,34 @@ const User = require("./models/User");
 const Event = require("./models/Event");
 
 // Middleware
-//Secures HTTP headers
+// Secures HTTP headers
 app.use(helmet());
-//Stops XSS attacks
+// Stops XSS attacks
 app.use(xss());
 
 //Stops oversending to routes
 app.use(
-  rateLimiter({
-    windowMs: 15 * 60 * 1000, //15 min
-    max: 100,
-  })
+    rateLimiter({
+        windowMs: 15 * 60 * 1000, //15 min
+        max: 100,
+    })
 );
 
 mongoose.connect(process.env.MONGO_URI).then(() => {
-  console.log("Conntected to db");
+    console.log("Conntected to db");
 });
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PATCH, DELETE, OPTIONS"
-  );
-  next();
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    );
+    res.setHeader(
+        "Access-Control-Allow-Methods",
+        "GET, POST, PATCH, DELETE, OPTIONS"
+    );
+    next();
 });
 
 app.get("/api", (req, res) => {});
@@ -52,43 +52,48 @@ app.get("/api", (req, res) => {});
 //     res.json({ status: "OK" });
 // });
 
+// Create new event
 app.post(
-  "/api/event",
-  [
-    check("title", "Title is required").not().isEmpty(),
-    check("time", "Time is required").not().isEmpty(),
-    check("location", "Location is required").not().isEmpty(),
-  ],
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({
-        errors: errors.array(),
-      });
+    "/api/event",
+    [
+        check("title", "Title is required").not().isEmpty(),
+        check("time", "Time is required").not().isEmpty(),
+        check("location", "Location is required").not().isEmpty(),
+    ],
+    async (req, res) => {
+        // Check to see if required fields were sent
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({
+                errors: errors.array(),
+            });
+        }
+
+        const { title, time, location, description } = req.body;
+
+        // build event object
+        const eventFields = {
+            title: title,
+            author: req.user.id,
+            time,
+            location,
+        };
+
+        if (description) profileFields.description = description;
+
+        try {
+            // create event document and save
+            let event = new Event(eventFields);
+
+            await event.save();
+            res.json(profile);
+        } catch (error) {
+            console.error(error.message);
+            res.status(500).send("Server Error");
+        }
     }
-
-    const { title, time, location, description } = req.body;
-    const eventFields = {
-      title: title,
-      author: req.user.id,
-      time,
-      location,
-    };
-
-    if (description) profileFields.description = description;
-
-    try {
-      let event = new Event(eventFields);
-
-      await event.save();
-      res.json(profile);
-    } catch (error) {
-      console.error(error.message);
-      res.status(500).send("Server Error");
-    }
-  }
 );
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });

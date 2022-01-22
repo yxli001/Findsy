@@ -16,10 +16,10 @@ export const Navbar = () => {
                     <Navitem url="/" name="Home" />
                 </li>
                 <li className="link" onClick={hideNavbar}>
-                    <Navitem url="/upcoming_events" name="Upcoming Events" />
+                    <Navitem url="/events" name="Upcoming Events" />
                 </li>
                 <li className="link" onClick={hideNavbar}>
-                    <Navitem url="/post_events" name="Post Event" />
+                    <Navitem url="/events/new" name="Post Event" />
                 </li>
             </ul>
             <div className="burger" onClick={navAnimationHandler}>

@@ -9,7 +9,7 @@ const App = () => {
                 <Navbar />
             </div>
             <Routes>
-                <Route path="/post_events" element={<PostEvents />} />
+                <Route path="/events/new" element={<PostEvents />} />
             </Routes>
         </Router>
     );
