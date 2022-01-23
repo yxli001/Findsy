@@ -123,3 +123,15 @@
 .toggle .line3 {
     transform: rotate(45deg) translate(-5px, -6px);
 }
+
+.logout {
+    color: black;
+    letter-spacing: 2px;
+    font-weight: bold;
+    margin-top: 18px;
+    cursor: pointer;
+}
+
+.none {
+    display: none;
+}

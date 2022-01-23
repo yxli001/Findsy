@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 export const Navitem = (props) => {
-    const { url, name } = props;
+    const { url, name, token } = props;
 
     return (
         <div className="nav-item-container">

@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 import qs from "qs";
 
 export const Signup = (props) => {
     const [emailState, setEmailState] = useState("");
     const [passwordState, setPasswordState] = useState("");
     const [nameState, setNameState] = useState("");
+    const [redirect, setRedirect] = useState(false);
     const signUpSubmitHandler = (e) => {
         e.preventDefault();
         signUpUser();
@@ -29,15 +31,35 @@ export const Signup = (props) => {
                     "application/x-www-form-urlencoded;charset=utf-8",
             },
         });
-        console.log(res);
-        alert("Success");
+        if (res.data) {
+            localStorage.setItem("token", res.data.data);
+            // console.log(localStorage.getItem("token")); //Have the token
+            props.tokenGiver(localStorage.getItem("token")); //Give the token and update the state
+            setRedirect(true);
+        } else {
+            alert(
+                "Something went wrong. Please double check what you filled out"
+            );
+        }
     };
 
     return (
         <div className="login-wrapper">
+            {redirect && (
+                <Navigate
+                    to={{
+                        pathname: "/events",
+                    }}
+                />
+            )}
             <div className="secondary-login-wrapper">
                 <h1 className="login-form-header">Findsy</h1>
                 <p>Connect with your community</p>
+                <h4 className="redirect-link">
+                    <a className="redirect-link" href="/login">
+                        Already have an account? You can log in here
+                    </a>
+                </h4>
                 <div className="login-form-wrapper">
                     <div className="forced-center">
                         <h3>Sign Up</h3>

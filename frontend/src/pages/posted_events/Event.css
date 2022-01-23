@@ -1,0 +1,9 @@
+.my-events-event {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    align-items: center;
+    border-radius: 10px;
+    width: 100%;
+    padding: 1.5%;
+}

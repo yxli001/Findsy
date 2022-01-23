@@ -31,7 +31,7 @@ app.use(
 );
 
 mongoose.connect(process.env.MONGO_URI).then(() => {
-    console.log("Conntected to db");
+    console.log("Connected to db");
 });
 
 app.use((req, res, next) => {
@@ -42,12 +42,13 @@ app.use((req, res, next) => {
     );
     res.setHeader(
         "Access-Control-Allow-Methods",
-        "GET, POST, PATCH, DELETE, OPTIONS"
+        "GET, POST, PATCH, DELETE, OPTIONS, PUT"
     );
     next();
 });
 
 // Routes
+
 app.use("/api/auth", authRouter);
 app.use("/api/events", eventRouter);
 

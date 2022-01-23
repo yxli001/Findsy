@@ -1,0 +1,6 @@
+.grid-bookmark-events {
+    display: grid;
+    margin: 2%;
+    grid-template-columns: repeat(4, 20%);
+    grid-gap: 50px 100px;
+}

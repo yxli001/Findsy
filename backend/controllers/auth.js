@@ -21,8 +21,11 @@ const register = async (req, res) => {
             email: username,
             password: password,
         });
-
-        return res.json({ user: response });
+        const token = jwt.sign(
+            { id: response._id, username: response.email },
+            process.env.JWT_SECRET
+        ); //Publicly visible do not put important stuff here
+        return res.json({ status: "OK", data: token }); //Have the token
     } catch (error) {
         if (error.code === 11000) {
             //Duplicate key error
@@ -59,13 +62,39 @@ const login = async (req, res) => {
             process.env.JWT_SECRET
         ); //Publicly visible do not put important stuff here
         console.log(token);
-        return res.json({ status: "OK", data: token });
+        return res.status(200).json({ status: "OK", data: token });
     }
 
-    res.json({ status: "error", error: "Invalid username/password" });
+    return res.status(400).json({
+        status: "error",
+        error: "Invalid username/password",
+    });
+};
+
+const getLoggedInName = async (req, res) => {
+    try {
+        const foundUser = await User.findOne({ _id: req.user.id });
+
+        return res.status(200).json({ name: foundUser.name });
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+const getName = async (req, res) => {
+    const { id } = req.body;
+    try {
+        const foundUser = await User.findOne({ id: id });
+
+        return res.status(200).json({ name: foundUser.name });
+    } catch (err) {
+        console.log(err);
+    }
 };
 
 module.exports = {
     register,
     login,
+    getLoggedInName,
+    getName,
 };

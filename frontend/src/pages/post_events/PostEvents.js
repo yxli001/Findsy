@@ -1,14 +1,37 @@
 import React, { useState } from "react";
 import "./PostEvents.css";
+import axios from "axios";
+import qs from "qs";
 
-export const PostEvents = () => {
+export const PostEvents = (props) => {
     const [titleState, setTitleState] = useState("");
     const [descriptionState, setDescriptionState] = useState("");
     const [dateState, setDateState] = useState("");
     const [locationState, setLocationState] = useState("");
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
+
+        setTitleState("");
+        setDescriptionState("");
+        setDateState("");
+        setLocationState("");
+
+        await axios({
+            method: "post",
+            url: "http://localhost:5000/api/events",
+            data: qs.stringify({
+                title: titleState,
+                description: descriptionState,
+                time: dateState,
+                location: locationState,
+            }),
+            headers: {
+                "content-type":
+                    "application/x-www-form-urlencoded;charset=utf-8",
+                authorization: props.token,
+            },
+        });
     };
 
     return (
@@ -48,7 +71,7 @@ export const PostEvents = () => {
                         <div className="form-section">
                             <p className="form-header-title">Date</p>
                             <input
-                                type="date"
+                                type="datetime-local"
                                 id="date"
                                 name="date"
                                 value={dateState}

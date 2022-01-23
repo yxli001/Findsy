@@ -6,19 +6,35 @@ import { PostEvents } from "./pages/post_events/PostEvents";
 import { Login } from "./pages/login/Login";
 import { Signup } from "./pages/signup/Signup";
 import Events from "./pages/events/Events";
+import { BookmarkedEvents } from "./pages/bookmarked_events/BookmarkedEvents";
+import { ProtectedRoutes } from "./components/navbar/ProtectedRoutes";
+import { Home } from "./pages/home/Home";
+import { PostedEvents } from "./pages/posted_events/PostedEvents.js";
+
 const App = () => {
-    const [jwtToken, setJwtToken] = useState("");
+    const [user, setUserState] = useState(null);
     const gimmeJWTToken = (token) => {
-        setJwtToken(token);
+        setUserState(token); //Decode the token
     };
+
     return (
         <Router>
             <div className="navbar">
-                <Navbar token={jwtToken} />
+                <Navbar token={user} tokenGiver={gimmeJWTToken} />
             </div>
             <Routes>
-                <Route path="/events" element={<Events />} />
-                <Route path="/events/new" element={<PostEvents />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/events" element={<Events token={user} />} />
+                <Route element={<ProtectedRoutes token={user} />}>
+                    <Route
+                        path="/events/new"
+                        element={<PostEvents token={user} />}
+                    />
+                    <Route
+                        path="/events/bookmarked"
+                        element={<BookmarkedEvents token={user} />}
+                    />
+                </Route>
                 <Route
                     path="/login"
                     element={<Login tokenGiver={gimmeJWTToken} />}
@@ -26,6 +42,10 @@ const App = () => {
                 <Route
                     path="/signup"
                     element={<Signup tokenGiver={gimmeJWTToken} />}
+                />
+                <Route
+                    path="/events/my_events"
+                    element={<PostedEvents token={user} />}
                 />
             </Routes>
         </Router>

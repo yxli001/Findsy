@@ -1,0 +1,12 @@
+.meme-grid {
+    display: grid;
+    grid-gap: 50px;
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+}
+.meme-container {
+    margin: 2%;
+}
+.meme-image {
+    width: 100%;
+}

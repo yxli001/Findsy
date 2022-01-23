@@ -18,10 +18,11 @@ const eventSchema = new mongoose.Schema({
         type: Date,
         required: true,
     },
-    location: {
+    address: {
         type: String,
-        required: true,
+        require: true,
     },
+    location: [],
     description: {
         type: String,
     },

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Navigate } from "react-router-dom";
 import axios from "axios";
 import "./Login.css";
 import qs from "qs";
@@ -14,6 +15,8 @@ export const Login = (props) => {
         setPasswordState("");
     };
 
+    const [redirect, setRedirect] = useState(false);
+
     const loginUser = async () => {
         let res = await axios({
             method: "post",
@@ -27,27 +30,31 @@ export const Login = (props) => {
                     "application/x-www-form-urlencoded;charset=utf-8",
             },
         });
-        if (res.data.error) {
-            setFeedbackState(res.data.error);
-        } else {
-            setFeedbackState("");
-            const token = res.data.token;
-            localStorage.setItem("jwtToken", token);
-
-            //Save in local storage
-            //Add some middleware to check if the token is there in local storage
-            //Verify token
-
-            // setAuthorizationToken(token);
+        if (res.status === 200) {
+            localStorage.setItem("token", res.data.data);
+            // console.log(localStorage.getItem("token")); //Have the token
+            props.tokenGiver(localStorage.getItem("token")); //Give the token and update the state
+            setRedirect(true);
         }
-        console.log(res);
     };
 
     return (
         <div className="login-wrapper">
+            {redirect && (
+                <Navigate
+                    to={{
+                        pathname: "/events",
+                    }}
+                />
+            )}
             <div className="secondary-login-wrapper">
                 <h1 className="login-form-header">Findsy</h1>
                 <p>Connect with your community</p>
+                <h4 className="redirect-link">
+                    <a className="redirect-link" href="/signup">
+                        Don't have an account? You can create one here
+                    </a>
+                </h4>
                 <div className="login-form-wrapper">
                     <div className="forced-center">
                         <h3>Login</h3>

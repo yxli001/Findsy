@@ -2,8 +2,21 @@ const express = require("express");
 const router = express.Router();
 const auth = require("../middlewares/auth");
 const { check } = require("express-validator");
-const { newEvent } = require("../controllers/event");
+const {
+    newEvent,
+    getEvents,
+    getBookmarkedEvents,
+    joinEvent,
+    getMyEvents,
+} = require("../controllers/event");
 
+// Get all events
+router.get("/", getEvents);
+
+// Get all bookmarked events
+router.get("/bookmarked", [auth], getBookmarkedEvents);
+//Gets all events
+router.get("/my_events", [auth], getMyEvents);
 // Create new event
 router.post(
     "/",
@@ -15,5 +28,8 @@ router.post(
     ],
     newEvent
 );
+
+// Join event
+router.put("/join", [auth], joinEvent);
 
 module.exports = router;

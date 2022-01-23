@@ -1,0 +1,12 @@
+.event-bookmark-container {
+    background-color: white;
+    border-radius: 10px;
+    width: 100%;
+    padding: 5%;
+    word-wrap: break-word;
+}
+/* 
+.force-inline {
+    display: flex;
+    justify-content: space-around;
+} */

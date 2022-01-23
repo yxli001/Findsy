@@ -1,0 +1,17 @@
+.posted-events-container {
+    display: grid;
+    margin: 2%;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 50px 100px;
+}
+
+.new-event {
+    background-color: #345eeb;
+    color: white;
+    width: fit-content;
+    height: fit-content;
+    padding: 1rem 1rem;
+    text-decoration: none;
+    margin-left: 3rem;
+    border-radius: 5px;
+}
