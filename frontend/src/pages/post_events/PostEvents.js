@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import "./PostEvents.css";
 import axios from "axios";
 import qs from "qs";
+import { Message } from "../../components/message/Message.js";
 
 export const PostEvents = (props) => {
     const [titleState, setTitleState] = useState("");
     const [descriptionState, setDescriptionState] = useState("");
     const [dateState, setDateState] = useState("");
     const [locationState, setLocationState] = useState("");
-
+    const [isState, setIsState] = useState("");
     const submitHandler = async (e) => {
         e.preventDefault();
 
@@ -17,7 +18,7 @@ export const PostEvents = (props) => {
         setDateState("");
         setLocationState("");
 
-        await axios({
+        let res = await axios({
             method: "post",
             url: "http://localhost:5000/api/events",
             data: qs.stringify({
@@ -32,6 +33,11 @@ export const PostEvents = (props) => {
                 authorization: props.token,
             },
         });
+        if (res.status === 200) {
+            setIsState("success");
+        } else {
+            setIsState("error");
+        }
     };
 
     return (
@@ -40,6 +46,16 @@ export const PostEvents = (props) => {
                 <div className="post-events-title">
                     <h1 className="post-event-header">New Event</h1>
                 </div>
+                {isState === "error" ? (
+                    <Message
+                        message={"Server Error. Please try again later"}
+                        type="error"
+                    />
+                ) : isState === "success" ? (
+                    <Message message={"Event Created!"} type="success" />
+                ) : (
+                    <></>
+                )}
                 <div className="post-events-form">
                     <form onSubmit={submitHandler}>
                         <div className="form-section">

@@ -8,10 +8,20 @@
 .new-event {
     background-color: #345eeb;
     color: white;
-    width: fit-content;
-    height: fit-content;
-    padding: 1rem 1rem;
     text-decoration: none;
     margin-left: 3rem;
     border-radius: 5px;
+    text-decoration: none;
+}
+
+.new-event {
+    padding: 1%;
+    border: none;
+    border-radius: 5px;
+    margin-top: 2%;
+}
+
+.link-add {
+    text-decoration: none;
+    color: white;
 }

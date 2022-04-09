@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 import qs from "qs";
+import { Message } from "../../components/message/Message.js";
 
 export const Signup = (props) => {
     const [emailState, setEmailState] = useState("");
     const [passwordState, setPasswordState] = useState("");
     const [nameState, setNameState] = useState("");
     const [redirect, setRedirect] = useState(false);
+    const [isState, setIsState] = useState("none");
     const signUpSubmitHandler = (e) => {
         e.preventDefault();
         signUpUser();
@@ -35,11 +37,13 @@ export const Signup = (props) => {
             localStorage.setItem("token", res.data.data);
             // console.log(localStorage.getItem("token")); //Have the token
             props.tokenGiver(localStorage.getItem("token")); //Give the token and update the state
+            setIsState("success");
             setRedirect(true);
         } else {
             alert(
                 "Something went wrong. Please double check what you filled out"
             );
+            setIsState("error");
         }
     };
 
@@ -64,6 +68,16 @@ export const Signup = (props) => {
                     <div className="forced-center">
                         <h3>Sign Up</h3>
                     </div>
+                    {isState === "error" ? (
+                        <Message
+                            message={"Server Error. Please try again later"}
+                            type="error"
+                        />
+                    ) : isState === "success" ? (
+                        <Message message={"Account created"} type="success" />
+                    ) : (
+                        <></>
+                    )}
                     <form onSubmit={signUpSubmitHandler}>
                         <div className="login-form-section">
                             <p className="form-header-title">Name</p>
@@ -71,6 +85,7 @@ export const Signup = (props) => {
                                 type="text"
                                 name="name"
                                 id="name-signup"
+                                minLength={3}
                                 value={nameState}
                                 onChange={(e) => setNameState(e.target.value)}
                                 className="form-input"

@@ -128,10 +128,30 @@ const joinEvent = async (req, res) => {
     }
 };
 
+const getParticipants = async (req, res) => {
+    try {
+        const { eventID } = req.params;
+
+        const event = await Event.findOne({ _id: eventID });
+        const participants = [];
+
+        for (let i = 0; i < event.participants.length; i++) {
+            const user = await User.findOne({ _id: event.participants[i] });
+            participants.push(user);
+        }
+
+        res.json({ participants });
+    } catch (err) {
+        console.log(err);
+        res.send("Server Error");
+    }
+};
+
 module.exports = {
     newEvent,
     getEvents,
     getBookmarkedEvents,
     joinEvent,
     getMyEvents,
+    getParticipants,
 };

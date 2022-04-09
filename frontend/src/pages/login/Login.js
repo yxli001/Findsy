@@ -3,18 +3,20 @@ import { Navigate } from "react-router-dom";
 import axios from "axios";
 import "./Login.css";
 import qs from "qs";
-
+import { Message } from "../../components/message/Message.js";
 export const Login = (props) => {
     const [emailState, setEmailState] = useState("");
     const [passwordState, setPasswordState] = useState("");
     const [feedbackState, setFeedbackState] = useState("");
     const loginSubmitHandler = (e) => {
+        localStorage.removeItem("token");
         e.preventDefault();
         loginUser();
+        setIsState("warning");
         setEmailState("");
         setPasswordState("");
     };
-
+    const [isState, setIsState] = useState("");
     const [redirect, setRedirect] = useState(false);
 
     const loginUser = async () => {
@@ -34,7 +36,11 @@ export const Login = (props) => {
             localStorage.setItem("token", res.data.data);
             // console.log(localStorage.getItem("token")); //Have the token
             props.tokenGiver(localStorage.getItem("token")); //Give the token and update the state
+            setIsState("success");
             setRedirect(true);
+        } else {
+            setRedirect(false);
+            return setIsState("warning");
         }
     };
 
@@ -60,6 +66,16 @@ export const Login = (props) => {
                         <h3>Login</h3>
                         <p className="feedback">{feedbackState}</p>
                     </div>
+                    {isState === "warning" ? (
+                        <Message
+                            message={"Username/Password incorrect"}
+                            type="warning"
+                        />
+                    ) : isState === "success" ? (
+                        <Message message={"Logged in"} type="success" />
+                    ) : (
+                        <></>
+                    )}
                     <form onSubmit={loginSubmitHandler}>
                         <div className="login-form-section">
                             <p className="form-header-title">Email</p>

@@ -11,12 +11,12 @@ body {
 
 .overflow {
     height: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
 }
 
 html,
 body,
 #root {
     height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
 }

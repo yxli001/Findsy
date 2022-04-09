@@ -8,6 +8,7 @@ const {
     getBookmarkedEvents,
     joinEvent,
     getMyEvents,
+    getParticipants,
 } = require("../controllers/event");
 
 // Get all events
@@ -28,6 +29,8 @@ router.post(
     ],
     newEvent
 );
+
+router.get("/get_participants/:eventID", [auth], getParticipants);
 
 // Join event
 router.put("/join", [auth], joinEvent);

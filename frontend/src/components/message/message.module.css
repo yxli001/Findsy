@@ -1,0 +1,18 @@
+.container {
+    width: 100%;
+    padding: 2%;
+}
+
+.warning {
+    background-color: rgb(255, 243, 205);
+    color: rgb(163, 135, 53);
+}
+.success {
+    background-color: rgb(212, 237, 218);
+    color: rgb(188, 218, 195);
+}
+
+.error {
+    background-color: rgb(248, 215, 218);
+    color: rgb(166, 101, 107);
+}
