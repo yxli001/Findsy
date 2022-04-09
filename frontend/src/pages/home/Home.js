@@ -1,35 +1,38 @@
 import React from "react";
-import "./Home.css";
+import styles from "./Home.module.css";
+import "animate.css";
 
 export const Home = () => {
     return (
-        <div className="meme-container">
-            <h1>
-                This isn't our actual website please continue checking stuff
-                out... But enjoy
-            </h1>
-            <div className="meme-grid">
-                <img
-                    src="https://www.thecoderpedia.com/wp-content/uploads/2020/06/Programming-Jokes-Coding-Error-1024x860.jpg?x34900"
-                    alt="WHY DOESN'T IT LOAD"
-                    className="meme-image"
-                />
-                <img
-                    src="https://tinyurl.com/yur88n6m"
-                    alt="WHY DOESN'T IT LOAD"
-                    className="meme-image"
-                />
-                <img
-                    src="https://tinyurl.com/2p8bna8s"
-                    alt="WHY DOESN'T IT LOAD"
-                    className="meme-image"
-                />
-                <img
-                    src="https://tinyurl.com/2p9v25u5"
-                    alt="WHY DOESN'T IT LOAD"
-                    className="meme-image"
-                />
+        <div className={styles.container}>
+            {/* Background of some good environmental image maybe*/}
+            <div className={styles.imageContainer}>
+                <div className={styles.intro}>
+                    {/* The findsy part should fizzle in */}
+                    <h1
+                        className={`${styles.header} animate__animated animate__bounceInLeft`}
+                    >
+                        Welcome to{" "}
+                        <span className={`${styles.title}`}>Findsy</span>
+                    </h1>
+                    {/* Below should slide in */}
+                    <p
+                        className={`${styles.description} animate__animated animate__fadeIn animate__slower`}
+                    >
+                        The only community driven event sharing platform
+                    </p>
+                    {/* Button should be beating */}
+                    <button
+                        className={`${styles.joinButton} animate__animated animate__pulse animate__repeat-3	3 animate__delay-1s`}
+                    >
+                        Join an event today!
+                    </button>
+                </div>
+                <div
+                    className={`${styles.downwardsArrow} animate__animated animate__shakeY animate__slower 3s animate__infinite	infinite`}
+                ></div>
             </div>
+            <div className={styles.about}></div>
         </div>
     );
 };

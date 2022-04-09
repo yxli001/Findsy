@@ -6,7 +6,7 @@
     min-height: 8vh;
     width: 100%;
     background-color: #f1f1f1;
-    border-bottom: 0.05px solid rgb(221, 221, 221);
+    border-bottom: 0.05px solid #dddddd;
 }
 
 .logo {

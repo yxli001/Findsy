@@ -4,3 +4,23 @@
     grid-template-columns: repeat(4, 20%);
     grid-gap: 50px 100px;
 }
+
+.no-events {
+    margin: 2%;
+}
+
+.no-events-title {
+    margin-top: 3.5rem;
+    margin-bottom: 3rem;
+}
+
+.find-events {
+    background-color: #345eeb;
+    color: white;
+    width: fit-content;
+    height: fit-content;
+    padding: 1rem 1rem;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-left: 1rem;
+}

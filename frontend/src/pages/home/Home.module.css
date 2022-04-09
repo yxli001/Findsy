@@ -1,0 +1,51 @@
+.container {
+    width: 100%;
+    height: 69.2%;
+}
+
+.intro {
+    width: 30%;
+    padding: 4%;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.imageContainer {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.1)),
+        url("../../images/forest.jpg");
+    background-size: cover;
+    object-fit: cover;
+    padding: 5%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.header {
+    font-weight: normal;
+    font-size: 3rem;
+    margin: 0;
+}
+
+.title {
+    color: #345eeb;
+}
+
+.joinButton {
+    border: none;
+    font-size: 1rem;
+    background-color: #345eeb;
+    color: #f1f1f1;
+    padding: 3%;
+    margin-top: 2%;
+    border-radius: 5px;
+}
+
+.downwardsArrow {
+    background: url("../../images/double-down-arrow.png");
+    height: 50px;
+    width: 50px;
+    margin-top: 10%;
+}

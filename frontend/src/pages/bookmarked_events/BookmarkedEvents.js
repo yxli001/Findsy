@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./BookmarkedEvents.css";
 import axios from "axios";
 import Event from "./Event";
@@ -39,11 +40,19 @@ export const BookmarkedEvents = (props) => {
         getAllBookmarkedEvents();
     }, []);
 
-    //Link to that using axios here and put it in an array
-    //Map each item in an array to a component on the screen.
-    return (
+    const noEvents = (
+        <div className="no-events">
+            <h1 class="no-events-title">
+                Go explore events on the Find Events page!
+            </h1>
+            <Link to="/events" className="find-events">
+                Find Events
+            </Link>
+        </div>
+    );
+
+    const events = (
         <div className="grid-bookmark-events">
-            {/* Add Mapping function */}
             {bookmarkedEvents.map((event) => {
                 getName(event.author);
                 // {
@@ -62,4 +71,8 @@ export const BookmarkedEvents = (props) => {
             })}
         </div>
     );
+
+    //Link to that using axios here and put it in an array
+    //Map each item in an array to a component on the screen.
+    return <div>{bookmarkedEvents.length === 0 ? noEvents : events}</div>;
 };
